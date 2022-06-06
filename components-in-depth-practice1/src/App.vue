@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import MyTechWorld from "./components/myTechWorld.vue";
-import props from "./components/myTechWorld.vue";
 </script>
 
 <template>
@@ -12,7 +11,6 @@ import props from "./components/myTechWorld.vue";
       Typescript,
       CSS,
     "
-    favorite-i-d-e="VSCode"
     level-of-expertise="expert"
     :technologies="['vue', 'express', 'nodeJs', 'Sequelize', 'SQL', 'Django']"
     passion

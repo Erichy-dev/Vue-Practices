@@ -3,11 +3,13 @@ interface pp {
   name: { firstName?: string; secondName?: string };
   favoriteIDE: "VSCode" | "Atom";
   currentProgrammingLanguages?: string;
-  levelOfExpertise?: string;
+  levelOfExpertise: string;
   technologies?: string[];
   passion?: boolean;
 }
 const props = withDefaults(defineProps<pp>(), {
+  levelOfExpertise: 'pro',
+  favoriteIDE: 'VSCode'
 });
 </script>
 
