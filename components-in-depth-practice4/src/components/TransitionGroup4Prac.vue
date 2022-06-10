@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import api from "@/api";
+import { ref, watchEffect } from "vue";
 
-const items = ref([
-  "Eric Nyaga",
-  "Ellon Musk",
-  "Bill Gates",
-  "Kobe Bryant",
-  "Jordan Peterson",
-  "Tyson Fury",
-]);
+const items = ref([])
+watchEffect(async () => {
+  items.value = await api()
+})
 const newHero = ref("")
 const poorHero = ref("")
 const noHero = ref("")
