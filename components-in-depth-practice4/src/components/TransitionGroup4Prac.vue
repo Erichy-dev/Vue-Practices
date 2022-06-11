@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import api from "@/api";
 import { ref, watchEffect } from "vue";
+import api from "./api/api";
+import postContent from "./api/api"
 
 const items = ref([])
 watchEffect(async () => {
@@ -10,9 +11,9 @@ const newHero = ref("")
 const poorHero = ref("")
 const noHero = ref("")
 const hError = ref(true)
-function addHero(){
+async function addHero(){
   if (!items.value.includes(newHero.value)){
-    items.value.push(newHero.value)
+    items.value = items.value.push(newHero.value);
   } else {
     clearError("Hero already exists")
   }

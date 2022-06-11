@@ -23,6 +23,10 @@ let myArr = [
 app.get("/", (req, res) => {
   res.send(myArr)
 })
+app.post("/", (req, res) => {
+  myArr.push(req.body["name"])
+  res.send(myArr)
+})
 
 app.listen(port, ()=>{
   console.log("listening on port ", port)

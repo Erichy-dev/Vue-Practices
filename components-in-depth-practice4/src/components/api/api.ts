@@ -7,3 +7,7 @@ export default async () => {
   const importedArr = await axiosInstance.get("/")
   return importedArr.data;
 }
+export async function postContent(addedHero: string) {
+  const postedHero = await axiosInstance.post("/", { addedHero });
+  return postedHero.data;
+}
