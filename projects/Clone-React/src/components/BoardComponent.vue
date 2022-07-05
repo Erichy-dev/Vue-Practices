@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, watchEffect, watch } from "vue";
+import { onMounted, ref, watchEffect } from "vue";
 import SquareComponentVue from "./SquareComponent.vue";
 
 const numberOfSquares = ref([
@@ -7,19 +7,19 @@ const numberOfSquares = ref([
   [4, 5, 6],
   [7, 8, 9],
 ]);
-let squares: any;
-let winner: any = ref("");
-let GOAT: any = ref("");
-let err = ref(false)
+// eslint-disable-next-line no-undef
+let squares: HTMLCollectionOf<Element>;
+let winner = ref("");
+let GOAT = ref("");
+let err = ref(false);
 
 onMounted(() => {
   squares = document.getElementsByClassName("square")
 })
 
-function clearSquares(){
+function clearSquares(): void{
   for (let index = 0; index < squares.length; index++) {
-    let elem = squares[index];
-    elem.innerHTML = "";
+    squares[index].innerHTML = "";
   }
   noev = false;
   winner.value = "";
@@ -29,7 +29,7 @@ function clearSquares(){
   fillSquares(squares)
 }
 
-function childSpeaks(val: string, event: any){
+function childSpeaks(val: string, event: any): void{
   if (noev) {
     val === "X" ? Xwinner.value++ : Owinner.value++;
     currentSquare.value.push(event.target.id);
@@ -100,7 +100,7 @@ let handleClick = (elem: any) => {
   <main>
     <div class="status">
       <button style="margin-right: 0.5em">{{ winner }} Winning...</button>
-      <button>{{ GOAT }} WINS!!!</button>
+      <button v-show="GOAT">{{ GOAT }} WINS!!!</button>
     </div>
     <div class="board-row" v-for="number of numberOfSquares" :key="number[0]">
       <SquareComponentVue

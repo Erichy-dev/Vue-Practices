@@ -5,7 +5,6 @@ import GameComponentVue from "@/components/GameComponent.vue";
 
 <template>
   <main>
-    <div id="errors"></div>
     <game-component-vue />
   </main>
 </template>

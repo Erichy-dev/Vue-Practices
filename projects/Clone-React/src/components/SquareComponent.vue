@@ -4,7 +4,7 @@ import { ref } from "vue";
 let emit = defineEmits(["pushToArr"])
 
 let clickedValue = ref();
-function playValue(event: any): void{
+function playValue(event: Event): void{
   let nullsOsX = ref(["X", "O"]);
   let index = ref(Math.floor(Math.random() * 2));
   clickedValue.value = nullsOsX.value[index.value]
