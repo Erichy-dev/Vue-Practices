@@ -8,7 +8,7 @@ const numberOfSquares = ref([
   [7, 8, 9],
 ]);
 // eslint-disable-next-line no-undef
-let squares: HTMLCollectionOf<Element>;
+let squares: HTMLCollectionOf<Element> | HTMLElement[];
 let winner = ref("");
 let GOAT = ref("");
 let err = ref(false);
@@ -32,7 +32,7 @@ function clearSquares(): void{
 function childSpeaks(val: string, event: Event): void{
   if (noev) {
     val === "X" ? Xwinner.value++ : Owinner.value++;
-    currentSquare.value.push((event.target as HTMLInputElement).id);
+    currentSquare.value?.push((event.target as HTMLInputElement).id);
   }
 }
 
@@ -50,7 +50,9 @@ watchEffect(() => {
 })
 
 function redoStep(){
-  let currentId = currentSquare.value[currentSquare.value.length - 1]
+  let currentId = currentSquare.value
+    ? currentSquare.value[currentSquare.value.length - 1]
+    : "";
   let element = document.getElementById(currentId)
   let someClicked = Xwinner.value + Owinner.value;
   if (element && someClicked > 0) {
@@ -58,7 +60,7 @@ function redoStep(){
     previousVal === "X" ? Xwinner.value-- : Owinner.value--;
     element.innerHTML = "";
     GOAT.value = "";
-    currentSquare.value.splice(currentSquare.value.length - 1)
+    currentSquare.value?.splice(currentSquare.value?.length - 1)
     fillSquares([element])
   } else {
     err.value = true;
@@ -73,8 +75,8 @@ function redoStep(){
 let noev = true;
 let Xwinner = ref(0);
 let Owinner = ref(0);
-let currentSquare: any = ref([]);
-function fillSquares(squares: any){
+let currentSquare = ref<string[] | null>([]);
+function fillSquares(squares: HTMLElement[] | HTMLCollection){
   for (let index = 0; index < squares.length; index++) {
     let elem = squares[index]
 
@@ -90,7 +92,7 @@ let handleClick = (elem: Event) => {
   elemValue === "X" ? Xwinner.value++ : Owinner.value++;
   (elem.target as HTMLInputElement).innerHTML = elemValue;
   // id of current event target
-  currentSquare.value.push((elem.target as HTMLInputElement).id);
+  currentSquare.value?.push((elem.target as HTMLInputElement).id);
   (elem.target as HTMLInputElement).removeEventListener("click", handleClick)
 }
 </script>
