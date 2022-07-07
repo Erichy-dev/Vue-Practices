@@ -29,10 +29,10 @@ function clearSquares(): void{
   fillSquares(squares)
 }
 
-function childSpeaks(val: string, event: any): void{
+function childSpeaks(val: string, event: Event): void{
   if (noev) {
     val === "X" ? Xwinner.value++ : Owinner.value++;
-    currentSquare.value.push(event.target.id);
+    currentSquare.value.push((event.target as HTMLInputElement).id);
   }
 }
 
@@ -83,15 +83,15 @@ function fillSquares(squares: any){
 }
 
 //just using name "elem" instead of "event"
-let handleClick = (elem: any) => {
+let handleClick = (elem: Event) => {
   let nullsOsX = ref(["X", "O"]);
   let index = ref(Math.floor(Math.random() * 2));
   let elemValue: string = nullsOsX.value[index.value];
   elemValue === "X" ? Xwinner.value++ : Owinner.value++;
-  elem.target.innerHTML = elemValue;
+  (elem.target as HTMLInputElement).innerHTML = elemValue;
   // id of current event target
-  currentSquare.value.push(elem.target.id);
-  elem.target.removeEventListener("click", handleClick)
+  currentSquare.value.push((elem.target as HTMLInputElement).id);
+  (elem.target as HTMLInputElement).removeEventListener("click", handleClick)
 }
 </script>
 
